@@ -14,7 +14,7 @@
     let query = "SELECT * from author"
     
    sql.query(query, function(err, res) {
-    return res[0]
+    
     })
    }
 
