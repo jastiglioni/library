@@ -1,24 +1,14 @@
 const Author = require('../models/author');
 const sql = require('../database/server.js')
 
-// Display list of all Authors.
-exports.author_list = (req, res) => {
-   
-    Author.getAll(req, res)
-  //   let query = "SELECT * from author"
-    
-  //   sql.query(query, function(err, data) {
-  //       res.send(JSON.stringify(data))
-  //    })
-    
-    
+  // Display list of all Authors.
+  exports.author_list = (req, res) => {
+    Author.getAll(req, res)  
   };
   
   // Display detail page for a specific Author.
   exports.author_detail = (req, res) => {
-    // res.send(`NOT IMPLEMENTED: Author detail: ${req.params.id}`);
     Author.getAuthor(req, res)
-
   };
   
   // Display Author create form on GET.

@@ -31,4 +31,13 @@
     })
    }
 
+   Author.createAuthor = (req, res) => {
+    if (!req.body) {
+        console.log("There is no data entered: author.js 37");
+    } 
+
+    // sql.query("INSERT INTO author ('first_name', 'last_name', 'data_of_birth', 'date_of_death') VALUES")
+   }
+
+   
 module.exports = Author; 
