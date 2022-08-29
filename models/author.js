@@ -1,4 +1,25 @@
-    const sql = require('../database/server.js')
+    const { rejectSeries } = require('async');
+const { Connection } = require('tedious');
+const server = require('../database/server.js')
+    const Request = require('tedious').Request;
+    var TYPES = require('tedious').TYPES;
+
+    var config = {  
+        server: 'localhost',  //update me
+        authentication: {
+            type: 'default',
+            options: {
+                userName: 'admin', //update me
+                password: 'VesonIsM@ritime727'  //update me
+            }
+        },
+        options: {
+            // If you are on Microsoft Azure, you need encryption:
+            encrypt: true,
+            database: 'shop',  //update me
+            trustServerCertificate: true
+        }
+    };   
     
     class Author {
     constructor(author) {
@@ -10,34 +31,37 @@
     }
 }
 
+
+
+
+
    Author.getAll = (req, res) => {
-    let query = "SELECT * from author"
     
-    sql.query(query, function(err, data) {
-        if (err) throw err;
-        res.send(JSON.stringify(data))
-     })
 
-   }
+    const connection = new Connection(config);
 
-   Author.getAuthor = (req, res) => {
-    if (!req.body) {
-        console.log("There is no data entered: author.js 25");
-    } 
+    connection.connect((err) => {
+      if (err) {
+        console.log('Connection Failed');
+        throw err;
+      }
+    
+      executeStatement();
+    });
 
-    sql.query("SELECT * FROM author WHERE author_id = ?", [req.params.id], function (err, data) {
-        if (err) throw err;
-        res.send(JSON.stringify(data))
-    })
-   }
 
-   Author.createAuthor = (req, res) => {
-    if (!req.body) {
-        console.log("There is no data entered: author.js 37");
-    } 
+    function executeStatement() {
+        const request = new Request('select * from MyTable', (err, rowCount) => {
+          if (err) {
+            throw err;
+          }
+      
+          console.log('DONE!');
+          connection.close();
+        });
 
-    // sql.query("INSERT INTO author ('first_name', 'last_name', 'data_of_birth', 'date_of_death') VALUES")
-   }
+   }}
+
 
    
 module.exports = Author; 

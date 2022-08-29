@@ -17,7 +17,8 @@
     "morgan": "~1.9.1",
     "mssql": "^9.0.1",
     "mysql": "^2.18.1",
-    "pug": "^2.0.4"
+    "pug": "^2.0.4",
+    "tedious": "^15.1.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
